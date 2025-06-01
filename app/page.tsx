@@ -309,7 +309,7 @@ The solution involved a phased migration approach using AWS services like EC2, R
       title: "CI/CD Pipeline Modernization",
       description:
         "Built GitOps-driven pipeline automating deployments for 50+ microservices with comprehensive testing",
-      detailedDescription: `Modernized the entire CI/CD infrastructure for a large-scale microservices architecture. The project involved replacing legacy Jenkins pipelines with a modern GitOps approach using GitLab CI and Flux.
+      detailedDescription: `Modernized the entire CI/CD infrastructure for a large-scale microservices architecture. The project involved replacing legacy Jenkins pipelines with a modern GitOps approach using Github Actions and Flux.
 
 The new pipeline architecture included:
 • Automated testing at multiple stages (unit, integration, e2e)
@@ -619,15 +619,14 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
               </div>
 
               <div className="space-y-6">
-                <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-900 lg:text-6xl xl:text-7xl">
-                  Cloud Architect &{" "}
+                <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-900 lg:text-6xl xl:text-7xl max-w-4xl">
+                  DevOps Engineer &{" "}
                   <span className="bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-                    DevOps Engineer
+                    Cloud Architect
                   </span>
                 </h1>
                 <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
-                  AWS Certified professional with 5+ years of experience transforming enterprise infrastructure.
-                  Specialized in cloud migration, automation, and cost optimization with proven results.
+                  AWS Certified DevOps Engineer with 5+ years of experience architecting resilient, scalable cloud systems. I specialize in automating infrastructure, streamlining deployments, and cutting cloud costs all with enterprise-grade reliability.
                 </p>
               </div>
 
@@ -785,13 +784,13 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                 <div className="space-y-6">
                   <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">About Me</h2>
                   <p className="text-lg text-slate-600 leading-relaxed">
-                    Results-driven Cloud Architect and DevOps Engineer with expertise in AWS, Kubernetes, Docker,
-                    Terraform, and CI/CD automation. Passionate about implementing data-driven solutions and fostering
-                    DevSecOps culture.
+                    I'm a cloud-native engineer passionate about solving infrastructure problems with clean, scalable automation. 
+                    With over 5 years of experience in DevOps and cloud architecture, I’ve delivered resilient systems that enable zero-downtime deployments, 
+                    drive cost efficiency, and scale effortlessly.
                   </p>
                   <p className="text-lg text-slate-600 leading-relaxed">
-                    Proven track record in cross-functional stakeholder management, technical mentoring, and leading
-                    enterprise-level cloud transformation initiatives with measurable business impact.
+                    Whether it's provisioning with Terraform, orchestrating containers with Kubernetes, or enforcing security through DevSecOps.
+                    I bring a thoughtful, strategic mindset to every layer of the stack.
                   </p>
                 </div>
 
@@ -1503,7 +1502,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                 <span className="font-bold text-slate-900">Akilesh Thuniki</span>
               </div>
               <p className="text-sm text-slate-600">
-                Cloud Architect & DevOps Engineer specializing in enterprise-scale infrastructure transformations.
+                DevOps Engineer & Cloud Architect specializing in enterprise-scale infrastructure transformations.
               </p>
             </div>
             <div className="space-y-4">
