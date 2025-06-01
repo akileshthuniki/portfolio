@@ -4,7 +4,7 @@ A modern, responsive portfolio website showcasing my expertise as a Cloud Archit
 
 ## 🚀 Live Demo
 
-[Visit Portfolio Website](https://your-portfolio-url.com)
+[Visit Portfolio Website](https://akileshthuniki-portfolio.netlify.app/)
 
 ## ✨ Features
 
