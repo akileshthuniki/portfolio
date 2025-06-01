@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  output: 'export',
+  trailingSlash: true,
+  basePath: '/portfolio',
+  assetPrefix: '/portfolio/',
   images: {
     unoptimized: true,
-  },
+    loader: 'custom',
+    loaderFile: './imageLoader.js'
+  }
 }
 
 export default nextConfig
