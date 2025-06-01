@@ -5,9 +5,7 @@ const nextConfig = {
   basePath: '/portfolio',
   assetPrefix: '/portfolio/',
   images: {
-    unoptimized: true,
-    loader: 'custom',
-    loaderFile: './imageLoader.js'
+    unoptimized: true
   }
 }
 
