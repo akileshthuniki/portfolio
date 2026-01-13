@@ -231,7 +231,7 @@ export default function DevOpsPortfolio() {
       role: "DevOps Engineer",
       period: "May 2024 – Jan 2025",
       location: "New York, NY",
-      logo: "/images/bulkmagic.png",
+      logo: "/images/bulk_magic.webp",
       achievements: [
         "Automated CI/CD pipelines improving deployment efficiency by 35%",
         "Developed Python automation reducing manual effort by 30%",
