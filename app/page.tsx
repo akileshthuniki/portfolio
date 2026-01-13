@@ -167,7 +167,7 @@ export default function DevOpsPortfolio() {
     {
       name: "Sarah Johnson",
       role: "Engineering Manager",
-      company: "J.P. Morgan",
+      company: "Bulk Magic",
       content:
         "Akilesh transformed our deployment pipeline, reducing failures by 75% and significantly improving our team's productivity. His expertise in cloud architecture is exceptional.",
       rating: 5,
@@ -227,11 +227,11 @@ export default function DevOpsPortfolio() {
       technologies: ["AWS Lambda", "Terraform", "GitOps", "Kubernetes"],
     },
     {
-      company: "J.P. Morgan",
+      company: "Bulk Magic",
       role: "DevOps Engineer",
       period: "May 2024 – Jan 2025",
       location: "New York, NY",
-      logo: "/images/jpmorgan.png",
+      logo: "/images/bulkmagic.png",
       achievements: [
         "Automated CI/CD pipelines improving deployment efficiency by 35%",
         "Developed Python automation reducing manual effort by 30%",
