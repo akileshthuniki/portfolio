@@ -1327,7 +1327,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                     </div>
                     <div>
                       <div className="font-semibold">Email</div>
-                      <div className="text-slate-300">Akilesh.thuniki@aogjob.com</div>
+                      <div className="text-slate-300">Akilesh.cloudops@gmail.com</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 group">
