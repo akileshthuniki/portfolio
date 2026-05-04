@@ -40,13 +40,34 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import emailjs from "@emailjs/browser"
 
+interface Particle {
+  id: number
+  left: number
+  top: number
+  animationDelay: number
+  animationDuration: number
+}
+
+interface Project {
+  id: number
+  title: string
+  description: string
+  detailedDescription: string
+  metrics: string[]
+  technologies: string[]
+  image: string
+  githubUrl: string
+  challenges: string[]
+  outcomes: string[]
+}
+
 export default function DevOpsPortfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [isVisible, setIsVisible] = useState({})
+  const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
-  const [particles, setParticles] = useState([])
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [particles, setParticles] = useState<Particle[]>([])
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
