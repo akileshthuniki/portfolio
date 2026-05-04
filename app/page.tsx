@@ -230,7 +230,7 @@ export default function DevOpsPortfolio() {
       role: "Sr. DevOps Engineer",
       period: "May 2025 – Present",
       location: "Austin, TX (Remote)",
-      logo: "/images/shadowrock.jpg",
+      logo: "/placeholder.svg?height=60&width=60&text=NFP",
       achievements: [
         "Designed serverless platform on AWS Lambda & Step Functions — reducing infrastructure overhead by 50%",
         "Established GitOps workflows with ArgoCD & Terraform — cutting deployment time by 60%, zero-downtime releases",
@@ -247,7 +247,7 @@ export default function DevOpsPortfolio() {
       role: "DevOps Engineer",
       period: "February 2024 – April 2025",
       location: "Atlanta, GA",
-      logo: "/images/bulk_magic.webp",
+      logo: "/placeholder.svg?height=60&width=60&text=GHS",
       achievements: [
         "Built CI/CD pipelines with GitLab CI & GitHub Actions — improved deployment efficiency by 35%, reduced release failures by 45%",
         "Provisioned infrastructure with Terraform & Ansible — cut environment setup time by 50%",
@@ -262,7 +262,7 @@ export default function DevOpsPortfolio() {
       role: "DevOps / Build & Release Engineer",
       period: "June 2018 – July 2023",
       location: "Telangana, India",
-      logo: "/images/capgemini.png",
+      logo: "/placeholder.svg?height=60&width=60&text=UI",
       achievements: [
         "Automated CI/CD with Jenkins & Maven — reduced manual release effort by 40%, cut build-to-deploy time by 30%",
         "Served as Release Manager for 2 teams — zero missed deadlines across all production deployments",
@@ -293,7 +293,7 @@ Key Features:
 The tool parses Terraform plan output and applies deterministic risk algorithms to identify dangerous changes before they reach production. It's designed for teams who need infrastructure safety gates without compromising velocity.`,
       metrics: ["2K+ Downloads", "37 Countries", "6-Tier Risk Scoring"],
       technologies: ["Python", "Terraform", "CI/CD", "PyPI", "Ollama"],
-      image: "/images/CloudMigration.png",
+      image: "/placeholder.svg?height=400&width=800&text=PreApply",
       githubUrl: "https://github.com/yourusername/preapply",
 
       challenges: [
@@ -326,7 +326,7 @@ Repository Structure:
 The architecture implements tenant isolation, auto-scaling, observability, and GitOps best practices. It's designed for teams building SaaS products on Kubernetes who need a battle-tested reference implementation.`,
       metrics: ["5 Repositories", "Multi-Tenant", "Production-Ready"],
       technologies: ["AWS EKS", "Terraform", "ArgoCD", "Helm", "Kubernetes", "PostgreSQL", "GitOps"],
-      image: "/images/PipelineModernizationNew.png",
+      image: "/placeholder.svg?height=400&width=800&text=SaaSInfraLab",
       githubUrl: "https://github.com/yourusername/SaaSInfraLab",
       challenges: [
         "Tenant isolation at database and network layers",
