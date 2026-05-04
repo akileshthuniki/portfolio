@@ -32,8 +32,6 @@ import {
   Activity,
   Container,
   Plane,
-  Quote,
-  Star,
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -65,10 +63,13 @@ export default function DevOpsPortfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [particles, setParticles] = useState<Particle[]>([])
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [githubStatsUnavailable, setGithubStatsUnavailable] = useState(false)
+  const [githubLangsUnavailable, setGithubLangsUnavailable] = useState(false)
+  const [githubStatsRetryCount, setGithubStatsRetryCount] = useState(0)
+  const [githubLangsRetryCount, setGithubLangsRetryCount] = useState(0)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -88,6 +89,30 @@ export default function DevOpsPortfolio() {
     }))
     setParticles(newParticles)
   }, [])
+
+  useEffect(() => {
+    // If remote images fail before hydration, React onError can be missed.
+    // Re-check a few times after mount/retry to catch failed image states.
+    const timers: number[] = []
+
+    const checkImage = (id: string, setUnavailable: (value: boolean) => void) => {
+      const img = document.getElementById(id) as HTMLImageElement | null
+      if (!img) return
+      if (img.complete && img.naturalWidth === 0) setUnavailable(true)
+    }
+
+    ;[0, 250, 1000, 2500].forEach((delay) => {
+      const timer = window.setTimeout(() => {
+        checkImage("github-stats-img", setGithubStatsUnavailable)
+        checkImage("github-langs-img", setGithubLangsUnavailable)
+      }, delay)
+      timers.push(timer)
+    })
+
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer))
+    }
+  }, [githubStatsRetryCount, githubLangsRetryCount])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -116,14 +141,6 @@ export default function DevOpsPortfolio() {
       window.removeEventListener("scroll", handleScroll)
       observer.disconnect()
     }
-  }, [])
-
-  // Auto-rotate testimonials
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(interval)
   }, [])
 
   const skills = {
@@ -185,27 +202,6 @@ export default function DevOpsPortfolio() {
     { metric: "2K+", description: "PreApply Downloads", icon: <Download className="h-6 w-6" /> },
   ]
 
-  const testimonials = [
-    {
-      name: "Sundaresan Sivaraman",
-      role: "Project Manager",
-      company: "Capgemini",
-      content:
-        "Working with Akilesh on our cloud migration was a game-changer. His deep understanding of AWS and automation saved us months of work and significant costs.",
-      rating: 5,
-      avatar: "/placeholder.svg?height=60&width=60&text=MC",
-    },
-    {
-      name: "Matthew Busi",
-      role: "Founder & CEO",
-      company: "National Financial Partners",
-      content:
-        "Akilesh's ability to implement complex infrastructure solutions while maintaining security and compliance standards is remarkable. A true professional.",
-      rating: 5,
-      avatar: "/placeholder.svg?height=60&width=60&text=ER",
-    },
-  ]
-
   const techStack = [
     { name: "AWS", icon: <Cloud className="h-8 w-8" />, color: "text-orange-500" },
     { name: "Kubernetes", icon: <Server className="h-8 w-8" />, color: "text-blue-500" },
@@ -224,13 +220,25 @@ export default function DevOpsPortfolio() {
     { name: "QA Automation Engineer", issuer: "Capgemini", year: "2022" },
   ]
 
+  const githubStatsFallback = [
+    { label: "Contributions (12 months)", value: "419+" },
+    { label: "Focus", value: "DevOps & Cloud" },
+    { label: "Profile", value: "@akileshthuniki" },
+  ]
+
+  const githubLanguageFallback = [
+    { label: "Primary", value: "Python" },
+    { label: "Infrastructure", value: "HCL / Terraform" },
+    { label: "Automation", value: "TypeScript" },
+  ]
+
   const experience = [
     {
       company: "National Financial Partners",
       role: "Sr. DevOps Engineer",
       period: "May 2025 – Present",
       location: "Austin, TX (Remote)",
-      logo: "/placeholder.svg?height=60&width=60&text=NFP",
+      logo: "/images/nfp.jpg",
       achievements: [
         "Designed serverless platform on AWS Lambda & Step Functions — reducing infrastructure overhead by 50%",
         "Established GitOps workflows with ArgoCD & Terraform — cutting deployment time by 60%, zero-downtime releases",
@@ -247,7 +255,7 @@ export default function DevOpsPortfolio() {
       role: "DevOps Engineer",
       period: "February 2024 – April 2025",
       location: "Atlanta, GA",
-      logo: "/placeholder.svg?height=60&width=60&text=GHS",
+      logo: "/images/Gentiva_Logo_Horizontal.png",
       achievements: [
         "Built CI/CD pipelines with GitLab CI & GitHub Actions — improved deployment efficiency by 35%, reduced release failures by 45%",
         "Provisioned infrastructure with Terraform & Ansible — cut environment setup time by 50%",
@@ -262,7 +270,7 @@ export default function DevOpsPortfolio() {
       role: "DevOps / Build & Release Engineer",
       period: "June 2018 – July 2023",
       location: "Telangana, India",
-      logo: "/placeholder.svg?height=60&width=60&text=UI",
+      logo: "/images/unvired.png",
       achievements: [
         "Automated CI/CD with Jenkins & Maven — reduced manual release effort by 40%, cut build-to-deploy time by 30%",
         "Served as Release Manager for 2 teams — zero missed deadlines across all production deployments",
@@ -293,8 +301,8 @@ Key Features:
 The tool parses Terraform plan output and applies deterministic risk algorithms to identify dangerous changes before they reach production. It's designed for teams who need infrastructure safety gates without compromising velocity.`,
       metrics: ["2K+ Downloads", "37 Countries", "6-Tier Risk Scoring"],
       technologies: ["Python", "Terraform", "CI/CD", "PyPI", "Ollama"],
-      image: "/placeholder.svg?height=400&width=800&text=PreApply",
-      githubUrl: "https://github.com/yourusername/preapply",
+      image: "/images/preapply.png",
+      githubUrl: "https://github.com/akileshthuniki/PreApply",
 
       challenges: [
         "Deterministic risk scoring without false positives",
@@ -324,10 +332,10 @@ Repository Structure:
 • Docs — Full architecture and deployment documentation
 
 The architecture implements tenant isolation, auto-scaling, observability, and GitOps best practices. It's designed for teams building SaaS products on Kubernetes who need a battle-tested reference implementation.`,
-      metrics: ["5 Repositories", "Multi-Tenant", "Production-Ready"],
+      metrics: ["Multi-Tenant", "Production-Ready" , "Schema-per-tenant database isolation"],
       technologies: ["AWS EKS", "Terraform", "ArgoCD", "Helm", "Kubernetes", "PostgreSQL", "GitOps"],
-      image: "/placeholder.svg?height=400&width=800&text=SaaSInfraLab",
-      githubUrl: "https://github.com/yourusername/SaaSInfraLab",
+      image: "/images/saasinfralab.png",
+      githubUrl: "https://github.com/SaaSInfraLab/cloudnative-saas-eks",
       challenges: [
         "Tenant isolation at database and network layers",
         "Auto-scaling for variable tenant workloads",
@@ -339,6 +347,38 @@ The architecture implements tenant isolation, auto-scaling, observability, and G
         "Modular Terraform modules for reuse",
         "Schema-per-tenant database isolation",
         "GitOps-driven deployment workflows",
+      ],
+    },
+    {
+      id: 3,
+      title: "Ollama Infra CLI — Local AI for DevOps Workflows",
+      description:
+        "A lightweight Python CLI that integrates local LLMs directly into DevOps workflows for offline inference. Designed for security-conscious environments with custom prompts tailored for Infrastructure as Code.",
+      detailedDescription: `Ollama Infra CLI is a developer-focused tool that brings AI assistance directly to your terminal without external API dependencies. It leverages local Ollama models to provide intelligent infrastructure insights offline.
+
+Key Features:
+• Offline AI Inference — Zero external API calls, works in air-gapped environments
+• Custom Infrastructure Prompts — Pre-built templates for Terraform, Kubernetes, AWS
+• Model Management — List, select, and interact with local Ollama models
+• Verbose Debugging — Toggle detailed output for troubleshooting
+• Stdin Support — Pipe Terraform plans, configs, or logs directly for analysis
+
+The CLI is designed for DevOps engineers who need AI-powered insights but work in security-restricted environments where cloud AI services aren't an option. It provides intelligent code review, infrastructure recommendations, and troubleshooting assistance—all running locally.`,
+      metrics: ["100% Offline", "Zero API Calls", "CLI-First"],
+      technologies: ["Python", "Ollama", "LLM", "CLI", "DevOps"],
+      image: "images/ollama-infra.png",
+      githubUrl: "https://github.com/akileshthuniki/ollama-infra-cli",
+      challenges: [
+        "Offline model performance optimization",
+        "Context window management for large configs",
+        "Creating effective infrastructure-focused prompts",
+        "Handling varied input formats (JSON, YAML, HCL)",
+      ],
+      outcomes: [
+        "Secure AI assistance in air-gapped environments",
+        "Fast local inference with no latency",
+        "Customizable prompts for infrastructure tasks",
+        "Simple pip-installable CLI tool",
       ],
     },
   ]
@@ -424,7 +464,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                 { href: "#experience", label: "Experience" },
                 { href: "#skills", label: "Skills" },
                 { href: "#projects", label: "Projects" },
-                { href: "#testimonials", label: "Testimonials" },
+                { href: "#github", label: "GitHub" },
                 { href: "#contact", label: "Contact" },
               ].map((item) => (
                 <Link
@@ -467,7 +507,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                   { href: "#experience", label: "Experience" },
                   { href: "#skills", label: "Skills" },
                   { href: "#projects", label: "Projects" },
-                  { href: "#testimonials", label: "Testimonials" },
+                  { href: "#github", label: "GitHub" },
                   { href: "#contact", label: "Contact" },
                 ].map((item) => (
                   <Link
@@ -657,7 +697,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                       <Linkedin className="h-5 w-5" />
                     </Button>
                   </Link>
-                  <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://github.com/akileshthuniki" target="_blank" rel="noopener noreferrer">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -866,13 +906,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                     <CardContent className="p-8">
                       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                         <div className="flex items-start gap-6">
-                          <div className="relative">
+                          <div className="relative w-20 h-20 flex-shrink-0">
                             <Image
                               src={job.logo || "/placeholder.svg"}
-                              width={60}
-                              height={60}
+                              fill
                               alt={`${job.company} logo`}
-                              className="rounded-xl border shadow-lg hover:scale-110 transition-transform duration-300"
+                              className="rounded-xl shadow-lg hover:scale-110 transition-transform duration-300 object-contain"
                             />
                           </div>
                           <div className="space-y-3">
@@ -1004,20 +1043,20 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                 </p>
               </div>
 
-              <div className="grid gap-8 md:grid-cols-2">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project, index) => (
                   <Card
                     key={index}
                     className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up overflow-hidden group"
                     style={{ animationDelay: `${index * 0.2}s` }}
                   >
-                    <div className="relative overflow-hidden">
+                    <div className="relative overflow-hidden w-full bg-slate-50">
                       <Image
                         src={project.image || "/placeholder.svg"}
-                        width={400}
-                        height={200}
+                        width={800}
+                        height={400}
                         alt={project.title}
-                        className="aspect-video object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full aspect-video object-contain group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
                     <CardContent className="p-6">
@@ -1206,55 +1245,142 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
           )}
         </section>
 
-        {/* Simple Testimonials Section */}
+        {/* GitHub Activity Section */}
         <section
-          id="testimonials"
-          className={`py-20 md:py-32 bg-gradient-to-br from-slate-50 to-white transition-all duration-1000 ${
-            isVisible.testimonials ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          id="github"
+          className={`py-20 md:py-32 bg-white transition-all duration-1000 ${
+            isVisible.github ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <div className="container">
-            <div className="mx-auto max-w-4xl space-y-12">
-              <div className="text-center space-y-6">
-                <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">What Colleagues Say</h2>
+            <div className="mx-auto max-w-6xl space-y-12">
+              <div className="text-center space-y-6 animate-fade-in-up">
+                <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+                  GitHub Activity
+                </h2>
                 <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                  Testimonials from team members, managers, and clients I've worked with throughout my career.
+                  Active open-source contributor with 419 contributions in the last year. Building tools and infrastructure that solve real problems.
                 </p>
               </div>
 
-              <Card className="border-0 shadow-2xl overflow-hidden">
-                <CardContent className="p-8 md:p-12">
-                  <div className="flex flex-col items-center text-center space-y-6">
-                    <Quote className="h-12 w-12 text-slate-300" />
-                    <blockquote className="text-xl md:text-2xl font-medium text-slate-700 leading-relaxed">
-                      "{testimonials[currentTestimonial].content}"
-                    </blockquote>
-                    <div className="text-center">
-                      <div className="font-semibold text-slate-900">{testimonials[currentTestimonial].name}</div>
-                      <div className="text-sm text-slate-600">
-                        {testimonials[currentTestimonial].role} at {testimonials[currentTestimonial].company}
+              <div className="grid gap-8 md:grid-cols-2">
+                {/* GitHub Stats Card */}
+                <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-slate-900">
+                      <Github className="h-6 w-6" />
+                      GitHub Statistics
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {githubStatsUnavailable ? (
+                      <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 space-y-4">
+                        <p className="text-center text-slate-600">
+                          Live GitHub stats are temporarily unavailable. Showing portfolio highlights instead.
+                        </p>
+                        <div className="grid gap-3 sm:grid-cols-3">
+                          {githubStatsFallback.map((item) => (
+                            <div key={item.label} className="rounded-lg border border-slate-200 bg-white p-3 text-center">
+                              <div className="text-xs text-slate-500">{item.label}</div>
+                              <div className="text-sm font-semibold text-slate-800">{item.value}</div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex justify-center gap-3">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setGithubStatsUnavailable(false)
+                              setGithubStatsRetryCount((prev) => prev + 1)
+                            }}
+                          >
+                            Retry
+                          </Button>
+                          <Button asChild variant="ghost" size="sm">
+                            <Link href="https://github.com/akileshthuniki" target="_blank" rel="noopener noreferrer">
+                              Open GitHub
+                            </Link>
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex gap-1">
-                      {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    ) : (
+                      <img
+                        id="github-stats-img"
+                        src={`https://github-readme-stats.vercel.app/api?username=akileshthuniki&show_icons=true&theme=default&hide_border=true&bg_color=ffffff&title_color=1e293b&text_color=475569&icon_color=64748b&retry=${githubStatsRetryCount}`}
+                        alt="GitHub Stats"
+                        className="w-full rounded-lg"
+                        onError={() => setGithubStatsUnavailable(true)}
+                      />
+                    )}
+                  </CardContent>
+                </Card>
 
-              {/* Simple dots indicator */}
-              <div className="flex justify-center gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial ? "bg-slate-700 w-8" : "bg-slate-300"
-                    }`}
-                  />
-                ))}
+                {/* Top Languages Card */}
+                <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-slate-900">
+                      <Code className="h-6 w-6" />
+                      Most Used Languages
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {githubLangsUnavailable ? (
+                      <div className="rounded-lg border border-slate-200 bg-slate-50 p-6 space-y-4">
+                        <p className="text-center text-slate-600">
+                          Language stats are temporarily unavailable. Showing core stack instead.
+                        </p>
+                        <div className="grid gap-3 sm:grid-cols-3">
+                          {githubLanguageFallback.map((item) => (
+                            <div key={item.label} className="rounded-lg border border-slate-200 bg-white p-3 text-center">
+                              <div className="text-xs text-slate-500">{item.label}</div>
+                              <div className="text-sm font-semibold text-slate-800">{item.value}</div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex justify-center gap-3">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setGithubLangsUnavailable(false)
+                              setGithubLangsRetryCount((prev) => prev + 1)
+                            }}
+                          >
+                            Retry
+                          </Button>
+                          <Button asChild variant="ghost" size="sm">
+                            <Link href="https://github.com/akileshthuniki?tab=repositories" target="_blank" rel="noopener noreferrer">
+                              View Repositories
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <img
+                        id="github-langs-img"
+                        src={`https://github-readme-stats.vercel.app/api/top-langs/?username=akileshthuniki&layout=compact&theme=default&hide_border=true&bg_color=ffffff&title_color=1e293b&text_color=475569&retry=${githubLangsRetryCount}`}
+                        alt="Top Languages"
+                        className="w-full rounded-lg"
+                        onError={() => setGithubLangsUnavailable(true)}
+                      />
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Quick Links to Projects */}
+              <div className="text-center">
+                <Link href="https://github.com/akileshthuniki" target="_blank" rel="noopener noreferrer">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-slate-950 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  >
+                    <Github className="h-5 w-5 mr-2" />
+                    View Full GitHub Profile
+                    <ArrowRight className="h-5 w-5 ml-2" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -1327,7 +1453,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                         <Linkedin className="h-5 w-5" />
                       </Button>
                     </Link>
-                    <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://github.com/akileshthuniki" target="_blank" rel="noopener noreferrer">
                       <Button
                         variant="outline"
                         size="icon"
@@ -1464,7 +1590,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
             <div className="space-y-4">
               <h4 className="font-semibold text-slate-900">Quick Links</h4>
               <div className="space-y-2">
-                {["About", "Experience", "Skills", "Projects", "Testimonials", "Contact"].map((link) => (
+                {["About", "Experience", "Skills", "Projects", "Contact"].map((link) => (
                   <Link
                     key={link}
                     href={`#${link.toLowerCase()}`}
@@ -1487,7 +1613,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                     <Linkedin className="h-5 w-5" />
                   </Button>
                 </Link>
-                <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+                <Link href="https://github.com/akileshthuniki" target="_blank" rel="noopener noreferrer">
                   <Button
                     variant="ghost"
                     size="icon"
