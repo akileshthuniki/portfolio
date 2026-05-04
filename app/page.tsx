@@ -10,7 +10,6 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Phone,
   Cloud,
   Server,
   GitBranch,
@@ -157,22 +156,15 @@ export default function DevOpsPortfolio() {
   }
 
   const achievements = [
+    { metric: "6+", description: "Years Experience", icon: <Users className="h-6 w-6" /> },
     { metric: "35%", description: "AWS Cost Reduction", icon: <TrendingUp className="h-6 w-6" /> },
-    { metric: "70%", description: "Deployment Efficiency", icon: <Zap className="h-6 w-6" /> },
-    { metric: "99.99%", description: "System Uptime", icon: <CheckCircle className="h-6 w-6" /> },
-    { metric: "5M+", description: "Daily Transactions", icon: <Target className="h-6 w-6" /> },
+    { metric: "12 Min", description: "Incident Detection", icon: <Activity className="h-6 w-6" /> },
+    { metric: "10M+", description: "Events Processed Daily", icon: <Target className="h-6 w-6" /> },
+    { metric: "150+", description: "Services Secured", icon: <CheckCircle className="h-6 w-6" /> },
+    { metric: "2K+", description: "PreApply Downloads", icon: <Download className="h-6 w-6" /> },
   ]
 
   const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Engineering Manager",
-      company: "Bulk Magic",
-      content:
-        "Akilesh transformed our deployment pipeline, reducing failures by 75% and significantly improving our team's productivity. His expertise in cloud architecture is exceptional.",
-      rating: 5,
-      avatar: "/placeholder.svg?height=60&width=60&text=SJ",
-    },
     {
       name: "Sundaresan Sivaraman",
       role: "Project Manager",
@@ -185,7 +177,7 @@ export default function DevOpsPortfolio() {
     {
       name: "Matthew Busi",
       role: "Founder & CEO",
-      company: "ShadowRock",
+      company: "National Financial Partners",
       content:
         "Akilesh's ability to implement complex infrastructure solutions while maintaining security and compliance standards is remarkable. A true professional.",
       rating: 5,
@@ -213,161 +205,119 @@ export default function DevOpsPortfolio() {
 
   const experience = [
     {
-      company: "ShadowRock",
-      role: "Cloud Architect",
-      period: "Jan 2025 – Present",
-      location: "Remote",
+      company: "National Financial Partners",
+      role: "Sr. DevOps Engineer",
+      period: "May 2025 – Present",
+      location: "Austin, TX (Remote)",
       logo: "/images/shadowrock.jpg",
       achievements: [
-        "Architected serverless platform reducing infrastructure overhead by 50%",
-        "Established GitOps practices decreasing deployment time by 60%",
-        "Implemented zero-trust security achieving 100% compliance",
-        "Optimized AWS resources delivering 35% cost reduction",
+        "Designed serverless platform on AWS Lambda & Step Functions — reducing infrastructure overhead by 50%",
+        "Established GitOps workflows with ArgoCD & Terraform — cutting deployment time by 60%, zero-downtime releases",
+        "Engineered zero-trust security with Cognito, WAF & Shield — 100% compliance, MFA across all customer-facing apps",
+        "Eliminated hardcoded credentials across 150+ services via automated 24-hour secret rotation",
+        "Built event-driven APIs with SNS, SQS & Kinesis — improved reliability by 40%, reduced latency by 65%",
+        "Delivered observability with Prometheus, Grafana & ELK — cut incident detection from 30 to 12 minutes",
+        "Achieved 35% cost savings via right-sizing & spot instances",
       ],
-      technologies: ["AWS Lambda", "Terraform", "GitOps", "Kubernetes"],
+      technologies: ["AWS Lambda", "Step Functions", "ArgoCD", "Terraform", "Cognito", "WAF", "SNS", "SQS", "Kinesis", "Prometheus", "Grafana", "ELK"],
     },
     {
-      company: "Bulk Magic",
+      company: "Gentiva Health Service",
       role: "DevOps Engineer",
-      period: "May 2024 – Jan 2025",
-      location: "New York, NY",
+      period: "February 2024 – April 2025",
+      location: "Atlanta, GA",
       logo: "/images/bulk_magic.webp",
       achievements: [
-        "Automated CI/CD pipelines improving deployment efficiency by 35%",
-        "Developed Python automation reducing manual effort by 30%",
-        "Integrated monitoring detecting issues 30% faster",
-        "Built event-driven architectures boosting responsiveness by 40%",
+        "Built CI/CD pipelines with GitLab CI & GitHub Actions — improved deployment efficiency by 35%, reduced release failures by 45%",
+        "Provisioned infrastructure with Terraform & Ansible — cut environment setup time by 50%",
+        "Deployed Kubernetes clusters on AWS EKS & OpenShift with Helm charts for fault-tolerant microservices",
+        "Built event-driven architecture with SQS & Kafka — processed 10M+ events, improved responsiveness by 40%",
+        "Implemented monitoring with Prometheus, Grafana & Splunk — achieved 99.95% uptime",
       ],
-      technologies: ["Python", "Kubernetes", "GitLab CI", "Splunk"],
+      technologies: ["GitLab CI", "GitHub Actions", "Terraform", "Ansible", "AWS EKS", "OpenShift", "Helm", "SQS", "Kafka", "Prometheus", "Grafana", "Splunk"],
     },
     {
-      company: "Capgemini Technology Services",
-      role: "DevOps Engineer",
-      period: "Jun 2021 – Jul 2023",
-      location: "Hyderabad, IN",
+      company: "Unvired Inc.",
+      role: "DevOps / Build & Release Engineer",
+      period: "June 2018 – July 2023",
+      location: "Telangana, India",
       logo: "/images/capgemini.png",
       achievements: [
-        "Led DevOps transformation improving deployment reliability by 85%",
-        "Migrated 200+ legacy applications with zero data loss",
-        "Implemented message brokers handling 5M+ daily transactions",
-        "Enhanced observability reducing MTTR by 65%",
+        "Automated CI/CD with Jenkins & Maven — reduced manual release effort by 40%, cut build-to-deploy time by 30%",
+        "Served as Release Manager for 2 teams — zero missed deadlines across all production deployments",
+        "Provisioned Linux environments on AWS EC2 with Puppet — reduced setup time by 50%",
+        "Converted manual scripts to reusable Puppet manifests — reduced configuration drift by 35%",
+        "Built disaster recovery plans for Jenkins & Bamboo — maintained pipeline continuity during failures",
       ],
-      technologies: ["Docker", "Kubernetes", "Golang", "Kafka"],
-    },
-    {
-      company: "Tata Consultancy Services (TCS)",
-      role: "Cloud Engineer",
-      period: "Jul 2019 – Apr 2021",
-      location: "Bangalore, IN",
-      logo: "/images/tcs.png",
-      achievements: [
-        "Architected AWS networking infrastructure for 30+ critical applications achieving 99.9% uptime",
-        "Automated cloud provisioning cutting deployment time from days to minutes",
-        "Built scalable Jenkins CI/CD pipelines enabling 20+ daily deployments",
-        "Optimized IAM roles reducing vulnerabilities by 85% ensuring SOC2/HIPAA compliance",
-      ],
-      technologies: ["AWS", "Terraform", "Jenkins", "Docker"],
+      technologies: ["Jenkins", "Maven", "AWS EC2", "Puppet", "Bamboo", "Linux"],
     },
   ]
 
   const projects = [
     {
       id: 1,
-      title: "Enterprise Cloud Migration",
+      title: "PreApply — Terraform Blast Radius & Risk Analyzer",
       description:
-        "Led large-scale AWS migration for Fortune 500 client with zero downtime and comprehensive security implementation",
-      detailedDescription: `This project involved migrating a Fortune 500 company's entire infrastructure from on-premises data centers to AWS cloud. The migration included 200+ applications, multiple databases, and critical business systems serving millions of users daily.
+        "Deterministic Terraform plan risk analyzer published on PyPI. Analyzes infrastructure changes before you apply — computing blast radius and scoring risk across 4 dimensions: data loss, security, infrastructure, and cost.",
+      detailedDescription: `PreApply is a production-ready Terraform risk analysis tool that prevents infrastructure disasters before they happen. Published on PyPI with over 2,000 downloads across 37 countries.
 
-Key challenges included:
-• Zero-downtime requirement for critical business operations
-• Complex legacy system dependencies
-• Strict compliance requirements (SOC2, HIPAA)
-• Multi-region disaster recovery setup
-• Cost optimization while maintaining performance
+Key Features:
+• 6-tier risk scoring system (LOW → CRITICAL-CATASTROPHIC)
+• CI/CD policy enforcement with exit codes
+• Optional local AI via Ollama — fully offline capability
+• Analyzes data loss, security, infrastructure, and cost risks
+• Integrates seamlessly into existing CI/CD pipelines
+• Zero external dependencies for core functionality
 
-The solution involved a phased migration approach using AWS services like EC2, RDS, S3, CloudFront, and Lambda. We implemented Infrastructure as Code using Terraform and established comprehensive monitoring with CloudWatch and custom dashboards.`,
-      metrics: ["99.99% Uptime", "30% Cost Reduction", "70% Threat Mitigation"],
-      technologies: ["AWS", "Terraform", "Kubernetes", "Docker", "CloudWatch", "Lambda"],
+The tool parses Terraform plan output and applies deterministic risk algorithms to identify dangerous changes before they reach production. It's designed for teams who need infrastructure safety gates without compromising velocity.`,
+      metrics: ["2K+ Downloads", "37 Countries", "6-Tier Risk Scoring"],
+      technologies: ["Python", "Terraform", "CI/CD", "PyPI", "Ollama"],
       image: "/images/CloudMigration.png",
-      githubUrl: "https://github.com/yourusername/cloud-migration-project",
+      githubUrl: "https://github.com/yourusername/preapply",
 
       challenges: [
-        "Legacy system compatibility issues",
-        "Data migration without downtime",
-        "Security compliance requirements",
-        "Performance optimization",
+        "Deterministic risk scoring without false positives",
+        "Offline AI integration for air-gapped environments",
+        "CI/CD integration across different platforms",
+        "Parsing complex Terraform plan JSON",
       ],
       outcomes: [
-        "Reduced infrastructure costs by 30%",
-        "Improved system reliability to 99.99% uptime",
-        "Enhanced security posture with 70% threat reduction",
-        "Enabled auto-scaling capabilities",
+        "2,000+ downloads across 37 countries",
+        "Prevents infrastructure disasters before apply",
+        "Apache 2.0 open source license",
+        "pip install preapply - simple installation",
       ],
     },
     {
       id: 2,
-      title: "CI/CD Pipeline Modernization",
+      title: "SaaSInfraLab — Multi-Tenant SaaS on AWS EKS",
       description:
-        "Built GitOps-driven pipeline automating deployments for 50+ microservices with comprehensive testing",
-      detailedDescription: `Modernized the entire CI/CD infrastructure for a large-scale microservices architecture. The project involved replacing legacy Jenkins pipelines with a modern GitOps approach using Github Actions and Flux.
+        "Production-grade open-source reference architecture for multi-tenant SaaS applications on AWS EKS. A modular ecosystem of 5 repositories covering the full stack.",
+      detailedDescription: `SaaSInfraLab is a comprehensive reference architecture demonstrating production-ready multi-tenant SaaS infrastructure on AWS EKS. Built as a modular ecosystem to serve as a learning resource and production template.
 
-The new pipeline architecture included:
-• Automated testing at multiple stages (unit, integration, e2e)
-• Security scanning and vulnerability assessment
-• Automated deployment to multiple environments
-• Rollback capabilities and blue-green deployments
-• Comprehensive monitoring and alerting
+Repository Structure:
+• cloudnative-saas-eks — Complete multi-tenant infrastructure setup
+• terraform-modules — Reusable VPC, EKS, RDS, IAM modules
+• gitops-pipeline — ArgoCD-based continuous delivery workflows
+• sample-saas-app — Demo application with schema-per-tenant isolation
+• Docs — Full architecture and deployment documentation
 
-This transformation significantly improved deployment reliability and reduced the time from code commit to production deployment from hours to minutes.`,
-      metrics: ["75% Fewer Failures", "60% Faster Deployments", "100% Automation"],
-      technologies: ["Github Actions", "Flux", "Kubernetes", "Helm", "Docker", "Prometheus"],
+The architecture implements tenant isolation, auto-scaling, observability, and GitOps best practices. It's designed for teams building SaaS products on Kubernetes who need a battle-tested reference implementation.`,
+      metrics: ["5 Repositories", "Multi-Tenant", "Production-Ready"],
+      technologies: ["AWS EKS", "Terraform", "ArgoCD", "Helm", "Kubernetes", "PostgreSQL", "GitOps"],
       image: "/images/PipelineModernizationNew.png",
-      githubUrl: "https://github.com/yourusername/cicd-modernization",
+      githubUrl: "https://github.com/yourusername/SaaSInfraLab",
       challenges: [
-        "Legacy pipeline dependencies",
-        "Multiple environment configurations",
-        "Testing automation complexity",
-        "Zero-downtime deployment requirements",
+        "Tenant isolation at database and network layers",
+        "Auto-scaling for variable tenant workloads",
+        "GitOps workflow for multi-environment deployments",
+        "Cost allocation per tenant",
       ],
       outcomes: [
-        "Reduced deployment failures by 75%",
-        "Accelerated deployment speed by 60%",
-        "Achieved 100% deployment automation",
-        "Improved developer productivity",
-      ],
-    },
-    {
-      id: 3,
-      title: "Cost Optimization Platform",
-      description:
-        "Developed real-time monitoring and optimization platform reducing AWS spend significantly across multiple environments",
-      detailedDescription: `Created a comprehensive cost optimization platform that provides real-time visibility into AWS spending patterns and automatically implements cost-saving measures.
-
-The platform features:
-• Real-time cost monitoring and alerting
-• Automated resource rightsizing recommendations
-• Unused resource identification and cleanup
-• Reserved Instance optimization
-• Multi-account cost allocation and reporting
-• Custom dashboards for different stakeholders
-
-The solution uses a combination of AWS Cost Explorer APIs, CloudWatch metrics, and custom Python scripts to analyze usage patterns and provide actionable insights for cost reduction.`,
-      metrics: ["35% Cost Savings", "Real-time Monitoring", "Automated Scaling"],
-      technologies: ["Python", "Grafana", "CloudWatch", "Lambda", "DynamoDB", "API Gateway"],
-      image: "/images/CostOptimization.png",
-      githubUrl: "https://github.com/yourusername/cost-optimization-platform",
-
-      challenges: [
-        "Complex multi-account AWS setup",
-        "Real-time data processing requirements",
-        "Integration with existing monitoring tools",
-        "Automated decision-making algorithms",
-      ],
-      outcomes: [
-        "Achieved 35% reduction in AWS costs",
-        "Implemented real-time cost monitoring",
-        "Automated resource optimization",
-        "Improved cost visibility across teams",
+        "Complete multi-tenant reference architecture",
+        "Modular Terraform modules for reuse",
+        "Schema-per-tenant database isolation",
+        "GitOps-driven deployment workflows",
       ],
     },
   ]
@@ -607,10 +557,10 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
               <div className="flex flex-wrap items-center gap-3">
                 <div className="flex items-center gap-2 text-slate-600">
                   <MapPin className="h-4 w-4" />
-                  <span className="text-sm font-medium">Salt Lake City, USA</span>
+                  <span className="text-sm font-medium">Salt Lake City, Utah</span>
                 </div>
                 <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-0 shadow-lg">
-                  Available for Hire
+                  Open to Work
                 </Badge>
                 <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 shadow-lg flex items-center gap-1">
                   <Plane className="h-3 w-3" />
@@ -620,13 +570,13 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
 
               <div className="space-y-6">
                 <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-900 lg:text-6xl xl:text-7xl max-w-4xl">
-                  DevOps Engineer &{" "}
+                  Senior DevOps &{" "}
                   <span className="bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-                    Cloud Architect
+                    Cloud Engineer
                   </span>
                 </h1>
                 <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
-                  AWS Certified DevOps Engineer with 5+ years of experience architecting resilient, scalable cloud systems. I specialize in automating infrastructure, streamlining deployments, and cutting cloud costs all with enterprise-grade reliability.
+                  AWS Certified | SRE-Focused | Building reliable, scalable infrastructure for modern distributed systems
                 </p>
               </div>
 
@@ -643,7 +593,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                   variant="secondary"
                   className="bg-violet-100 text-violet-800 border-violet-200 hover:bg-violet-200 transition-colors"
                 >
-                  5+ Years Experience
+                  6+ Years Experience
                 </Badge>
                 <Badge
                   variant="secondary"
@@ -696,11 +646,6 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                     </Button>
                   </Link>
                 </div>
-                <div className="h-6 w-px bg-slate-300"></div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Phone className="h-4 w-4" />
-                  <span className="font-medium">+1 (385) 461-8890</span>
-                </div>
               </div>
             </div>
 
@@ -749,7 +694,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
         {/* Animated Key Achievements */}
         <section className="py-20 bg-white">
           <div className="container">
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
               {achievements.map((achievement, index) => (
                 <Card
                   key={index}
@@ -784,19 +729,19 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                 <div className="space-y-6">
                   <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">About Me</h2>
                   <p className="text-lg text-slate-600 leading-relaxed">
-                    I'm a cloud-native engineer passionate about solving infrastructure problems with clean, scalable automation. 
-                    With over 5 years of experience in DevOps and cloud architecture, I’ve delivered resilient systems that enable zero-downtime deployments, 
-                    drive cost efficiency, and scale effortlessly.
+                    I'm a Senior DevOps & Cloud Engineer with 6+ years of experience building reliable, scalable AWS infrastructure for modern distributed systems.
                   </p>
                   <p className="text-lg text-slate-600 leading-relaxed">
-                    Whether it's provisioning with Terraform, orchestrating containers with Kubernetes, or enforcing security through DevSecOps.
-                    I bring a thoughtful, strategic mindset to every layer of the stack.
+                    I've worked across fintech and healthcare environments, turning manual fragile processes into automated, production-ready systems. My work covers Terraform-driven infrastructure, Kubernetes platforms, CI/CD pipelines, DevSecOps, and end-to-end observability.
+                  </p>
+                  <p className="text-lg text-slate-600 leading-relaxed">
+                    I'm an AWS Certified Developer with hands-on experience in Kubernetes, Terraform, GitOps, and DevSecOps practices. I enjoy working on system design decisions — whether that's choosing between EKS and ECS, or building event-driven architectures using SQS, SNS, and Kinesis.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-8">
                   {[
-                    { icon: <Users className="h-6 w-6" />, label: "Experience", value: "5+ Years" },
+                    { icon: <Users className="h-6 w-6" />, label: "Experience", value: "6+ Years" },
                     { icon: <Award className="h-6 w-6" />, label: "Certifications", value: "AWS Certified" },
                     { icon: <Briefcase className="h-6 w-6" />, label: "Specialization", value: "Cloud Architecture" },
                     { icon: <Target className="h-6 w-6" />, label: "Focus", value: "Enterprise Scale" },
@@ -885,7 +830,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                   Professional Experience
                 </h2>
                 <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                  5+ years of hands-on experience in cloud architecture, DevOps automation, and enterprise
+                  6+ years of hands-on experience in cloud architecture, DevOps automation, and enterprise
                   transformations at leading technology companies.
                 </p>
               </div>
@@ -1034,12 +979,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
               <div className="text-center space-y-6 animate-fade-in-up">
                 <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">Featured Projects</h2>
                 <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                  Enterprise-scale projects demonstrating cloud architecture expertise and measurable business impact
-                  across various industries.
+                  Open-source projects and production tools demonstrating infrastructure automation, risk analysis, and cloud-native architecture expertise.
                 </p>
               </div>
 
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-8 md:grid-cols-2">
                 {projects.map((project, index) => (
                   <Card
                     key={index}
@@ -1332,25 +1276,16 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                   </div>
                   <div className="flex items-center gap-4 group">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors duration-300">
-                      <Phone className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">Phone</div>
-                      <div className="text-slate-300">+1 (385) 461-8890</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4 group">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors duration-300">
                       <MapPin className="h-6 w-6" />
                     </div>
                     <div>
                       <div className="font-semibold">Location</div>
-                      <div className="text-slate-300">Salt Lake City, USA</div>
+                      <div className="text-slate-300">Salt Lake City, Utah</div>
                     </div>
                   </div>
                   <div className="flex gap-4 pt-4">
                     <a
-                      href="mailto:akilesh.thuniki@aogjob.com?subject=Hello%20Akilesh&body=Hi%20Akilesh,%0D%0A%0D%0AI%20would%20like%20to%20discuss..."
+                      href="mailto:Akilesh.cloudops@gmail.com?subject=Hello%20Akilesh&body=Hi%20Akilesh,%0D%0A%0D%0AI%20would%20like%20to%20discuss..."
                       target="_blank"
                       rel="noopener noreferrer"
                     >
