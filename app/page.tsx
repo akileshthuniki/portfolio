@@ -1359,7 +1359,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
                     ) : (
                       <img
                         id="github-langs-img"
-                        src={`https://github-readme-stats.vercel.app/api/top-langs/?username=akileshthuniki&layout=compact&theme=default&hide_border=true&bg_color=ffffff&title_color=1e293b&text_color=475569&retry=${githubLangsRetryCount}`}
+                        src={`https://github-readme-stats.vercel.app/api/top-langs/?username=akileshthuniki&layout=compact&theme=default&hide_border=true&bg_color=ffffff&title_color=1e293b&text_color=475569&hide=C,Makefile,CMake&langs_count=6&retry=${githubLangsRetryCount}`}
                         alt="Top Languages"
                         className="w-full rounded-lg"
                         onError={() => setGithubLangsUnavailable(true)}
